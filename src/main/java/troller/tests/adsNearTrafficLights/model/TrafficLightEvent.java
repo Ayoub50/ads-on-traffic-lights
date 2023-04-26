@@ -4,14 +4,18 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "traffic_light_event")
 public class TrafficLightEvent {
     
-    @Column(name="id")
-    public String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     @Column(name="state")
     public String state;
@@ -19,7 +23,7 @@ public class TrafficLightEvent {
     @Column(name="timestamp")
     public LocalDateTime timestamp;
 
-    public void setId(String id){
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -31,7 +35,7 @@ public class TrafficLightEvent {
         this.timestamp = timestamp;
     }
 
-    public String getId(){
+    public Long getId(){
         return this.id;
     }
 

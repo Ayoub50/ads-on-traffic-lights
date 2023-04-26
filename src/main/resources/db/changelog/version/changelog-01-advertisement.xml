@@ -15,8 +15,8 @@
 			</not>
 		</preConditions>
 		<createTable tableName="advertisement">
-			<column name="id" type="varchar(255)" >		
-				<constraints nullable="false" />
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="content" type="varchar(255)" >		
 				<constraints nullable="false" />

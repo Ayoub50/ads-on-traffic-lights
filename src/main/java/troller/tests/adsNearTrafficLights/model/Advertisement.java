@@ -2,18 +2,28 @@ package troller.tests.adsNearTrafficLights.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="advertisement")
 public class Advertisement {
     
-    public String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
+
+    @Column(name="content")
     public String content;
+
+    @Column(name="timestamp")
     public LocalDateTime timestamp;
 
-    public void setId(String id){
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -25,7 +35,7 @@ public class Advertisement {
         this.timestamp = timestamp;
     }
 
-    public String getId(){
+    public Long getId(){
         return this.id;
     }
 
