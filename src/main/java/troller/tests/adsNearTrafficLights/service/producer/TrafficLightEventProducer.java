@@ -17,12 +17,14 @@ public class TrafficLightEventProducer {
     @Autowired
     private TrafficLightEventRepository trafficLightEventRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper; // Autowire the ObjectMapper instance here
+
     public void sendTrafficLightEvent(TrafficLightEvent event) {
         // Save the TrafficLightEvent in the database
         TrafficLightEvent savedEvent = trafficLightEventRepository.save(event);
 
         // Convert the saved TrafficLightEvent object to JSON
-        ObjectMapper objectMapper = new ObjectMapper();
         String eventJson;
         try {
             eventJson = objectMapper.writeValueAsString(savedEvent);
@@ -33,4 +35,5 @@ public class TrafficLightEventProducer {
         }
     }
 }
+
 

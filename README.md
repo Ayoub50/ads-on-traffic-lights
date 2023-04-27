@@ -2,8 +2,8 @@
 
 ### Create a systemd unit file 
 
-filename = ads-on-traffic-lights.service
-location = /usr/lib/systemd/system/
+- filename: ads-on-traffic-lights.service
+- location: /usr/lib/systemd/system/
 
 ```service
 [Unit]
@@ -69,8 +69,8 @@ sudo systemctl restart ads-on-traffic-lights.service
 
 ### Create Java Spring Boot configuration file 
 
-filename = ads-on-traffic-lights.conf
-location = the same as the jar file
+- filename: ads-on-traffic-lights.conf
+- location: the same as the jar file
 
 ```conf
 spring.profiles.active=dev
