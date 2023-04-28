@@ -30,14 +30,6 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 
-		<!--LOGGING -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
-
 		<!-- DB MANAGEMENT -->
 		<dependency>
 			<groupId>javax.persistence</groupId>
