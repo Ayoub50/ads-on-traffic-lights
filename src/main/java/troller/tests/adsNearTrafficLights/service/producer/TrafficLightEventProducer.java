@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Service
@@ -17,12 +18,13 @@ public class TrafficLightEventProducer {
     @Autowired
     private TrafficLightEventRepository trafficLightEventRepository;
 
-    @Autowired
-    private ObjectMapper objectMapper; // Autowire the ObjectMapper instance here
-
     public void sendTrafficLightEvent(TrafficLightEvent event) {
         // Save the TrafficLightEvent in the database
         TrafficLightEvent savedEvent = trafficLightEventRepository.save(event);
+
+        // Configure the ObjectMapper and register the JavaTimeModule
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
         // Convert the saved TrafficLightEvent object to JSON
         String eventJson;
@@ -35,5 +37,3 @@ public class TrafficLightEventProducer {
         }
     }
 }
-
-

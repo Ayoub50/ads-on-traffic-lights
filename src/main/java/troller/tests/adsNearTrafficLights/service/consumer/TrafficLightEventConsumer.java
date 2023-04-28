@@ -1,4 +1,5 @@
 package troller.tests.adsNearTrafficLights.service.consumer;
+
 import troller.tests.adsNearTrafficLights.controller.AdvertisementController;
 import troller.tests.adsNearTrafficLights.model.Advertisement;
 import troller.tests.adsNearTrafficLights.model.TrafficLightEvent;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Service
@@ -19,8 +21,11 @@ public class TrafficLightEventConsumer {
 
     @KafkaListener(topics = "traffic-light-events", groupId = "my-group")
     public void consumeTrafficLightEvent(String eventJson) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
         try {
-            TrafficLightEvent event = new ObjectMapper().readValue(eventJson, TrafficLightEvent.class);
+            TrafficLightEvent event = objectMapper.readValue(eventJson, TrafficLightEvent.class);
 
             if ("RED".equals(event.getState())) {
                 displayAdvertisement();
@@ -38,4 +43,3 @@ public class TrafficLightEventConsumer {
         advertisementController.displayAdvertisement(ad);
     }
 }
-
