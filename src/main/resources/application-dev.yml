@@ -22,7 +22,7 @@ spring:
       auto-offset-reset: earliest
 
 logging:
-  level:
-    org.springframework: INFO
   file:
     name: /var/log/adsOnTrafficLights/debug.log
+  level:
+    org.springframework: INFO
