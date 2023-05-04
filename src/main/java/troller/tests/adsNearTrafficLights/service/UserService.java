@@ -1,5 +1,7 @@
 package troller.tests.adsNearTrafficLights.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +13,23 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // Method to create a user
     public User createUser(User user) {
-        // Perform validations, such as checking if the username already exists
-        // Save the user to the database
+        Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser.isPresent()) {
+            throw new IllegalArgumentException("A user with the given username already exists");
+        }
+        // You should hash the password before saving it to the database
         return userRepository.save(user);
     }
 
     // Method to authenticate login credentials
     public User authenticate(String username, String password) {
-        // Retrieve the user with the given username
-        // Check if the password matches
-        // If the credentials are valid, return the user object
-        // Otherwise, throw an exception or return an appropriate response
-        return null;
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
+            return user.orElse(null);
+        } else {
+            throw new IllegalArgumentException("Invalid username or password");
+        }
     }
 }
 

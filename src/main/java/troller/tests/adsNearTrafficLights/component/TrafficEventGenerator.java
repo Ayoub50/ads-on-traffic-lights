@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-@Component
+//@Component
 public class TrafficEventGenerator {
 
     public static Logger logger = LoggerFactory.getLogger(TrafficEventGenerator.class);

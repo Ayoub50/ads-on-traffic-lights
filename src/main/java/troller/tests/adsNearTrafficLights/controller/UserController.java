@@ -1,6 +1,9 @@
 package troller.tests.adsNearTrafficLights.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +21,24 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
-        // Call the createUser method from the UserService
-        // Return a success response or an appropriate error message
-        return null; 
+        try {
+            User newUser = userService.createUser(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        // Call the authenticate method from the UserService
-        // Return a success response with the user object or an appropriate error message
-        return null;
+    public ResponseEntity<?> login(@RequestBody Map<String, String> userLoginData) {
+        String username = userLoginData.get("username");
+        String password = userLoginData.get("password");
+
+        try {
+            User user = userService.authenticate(username, password);
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
     }
 }

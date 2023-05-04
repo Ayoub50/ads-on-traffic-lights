@@ -24,7 +24,7 @@
             <column name="password" type="varchar(255)" >		
 				<constraints nullable="false" />
 			</column>
-            <column name="userType" type="varchar(8)" >		
+            <column name="user_type" type="varchar(8)" >		
 				<constraints nullable="false" />
 			</column>
 			<column name="timestamp" type="DATETIME">

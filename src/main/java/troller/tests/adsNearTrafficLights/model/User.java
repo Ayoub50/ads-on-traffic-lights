@@ -23,7 +23,7 @@ public class User {
     @Column(name="password")
     private String password;
 
-    @Column(name="userType")
+    @Column(name="user_type")
     private String userType;
 
     @Column(name="timestamp")
@@ -31,6 +31,42 @@ public class User {
     
     public Long getId(){
         return id;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public String getUserType(){
+        return userType;
+    }
+
+    public LocalDateTime getTimestamp(){
+        return timestamp;
+    }
+
+    public void setId(Long id){
+        this.id = id;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public void setUserType(String userType){
+        this.userType = userType;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp){
+        this.timestamp = timestamp;
     }
 
 }
