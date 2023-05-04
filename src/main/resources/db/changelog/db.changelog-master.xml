@@ -8,5 +8,6 @@
     
     <include file="/version/changelog-00-trafficLightEvent.xml" relativeToChangelogFile="true"/>
 	<include file="/version/changelog-01-advertisement.xml" relativeToChangelogFile="true"/>
+	<include file="/version/changelog-02-user.xml" relativeToChangelogFile="true"/>
 	
 </databaseChangeLog>

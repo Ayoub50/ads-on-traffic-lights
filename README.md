@@ -1,7 +1,7 @@
 ## Project Description
 This project is built only for training purposes.
 The initial idea was to use Apache Kafka and create something that can make the most of its potential.
-So one possible real implementation is a system that, based on traffic light colors, displays different advertisements on billboards placed near the traffic light.
+So one possible real implementation is a system that, based on traffic light colors, displays different advertisements on billboards placed near the traffic light. This is to ensure that drivers at the traffic light can be entertained by advertising.
 
 ### Basic implemementation description
 
