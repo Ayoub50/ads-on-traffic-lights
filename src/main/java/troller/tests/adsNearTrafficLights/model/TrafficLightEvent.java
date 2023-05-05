@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "traffic_light_event")
 public class TrafficLightEvent {
@@ -21,6 +23,7 @@ public class TrafficLightEvent {
     public String state;
 
     @Column(name="timestamp")
+    @CreationTimestamp
     public LocalDateTime timestamp;
 
     public void setId(Long id){

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name="user")
 public class User {
@@ -27,6 +29,7 @@ public class User {
     private String userType;
 
     @Column(name="timestamp")
+    @CreationTimestamp
     private LocalDateTime timestamp;
     
     public Long getId(){
