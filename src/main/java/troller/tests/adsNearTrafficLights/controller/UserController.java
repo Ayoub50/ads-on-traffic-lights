@@ -5,25 +5,47 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import troller.tests.adsNearTrafficLights.dto.JwtResponse;
+import troller.tests.adsNearTrafficLights.dto.UserResponse;
 import troller.tests.adsNearTrafficLights.model.User;
+import troller.tests.adsNearTrafficLights.security.JwtUtil;
 import troller.tests.adsNearTrafficLights.service.UserService;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            User newUser = userService.createUser(user);
-            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+            userService.createUser(user);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+            String jwt = jwtUtil.generateToken(userDetails);
+            JwtResponse jwtResponse = new JwtResponse();
+            jwtResponse.setToken(jwt);
+
+            return new ResponseEntity<>(jwtResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -35,10 +57,17 @@ public class UserController {
         String password = userLoginData.get("password");
 
         try {
-            User user = userService.authenticate(username, password);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password));
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            String jwt = jwtUtil.generateToken(userDetails);
+            JwtResponse jwtResponse = new JwtResponse();
+            jwtResponse.setToken(jwt);
+            
+            return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
+
 }

@@ -14,7 +14,7 @@ import troller.tests.adsNearTrafficLights.model.Stoplight;
 import troller.tests.adsNearTrafficLights.service.StoplightService;
 
 @RestController
-@RequestMapping("/api/stoplight")
+@RequestMapping("/stoplight")
 public class StoplightController {
 
     @Autowired

@@ -10,12 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@RequestMapping("/api/advertisements")
+@RequestMapping("/advertisement")
 public class AdvertisementController {
 
     public static Logger logger = LoggerFactory.getLogger(AdvertisementController.class);
 
-    @PostMapping
+    @PostMapping("/display")
     public ResponseEntity<Void> displayAdvertisement(@RequestBody Advertisement ad) {
         logger.info("Displaying ad: " + ad.getContent());
         return ResponseEntity.ok().build();

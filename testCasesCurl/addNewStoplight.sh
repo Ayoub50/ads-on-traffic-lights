@@ -1,4 +1,4 @@
-curl -X POST "http://localhost:8080/api/stoplight/create" \
+curl -X POST "http://localhost:8080/stoplight/create" \
      -H "Content-Type: application/json" \
      -d '{
            "longitude": 12.4924,
