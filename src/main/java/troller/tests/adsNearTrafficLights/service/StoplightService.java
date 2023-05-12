@@ -13,7 +13,6 @@ import troller.tests.adsNearTrafficLights.model.Stoplight;
 import troller.tests.adsNearTrafficLights.model.User;
 import troller.tests.adsNearTrafficLights.repo.StoplightRepository;
 import troller.tests.adsNearTrafficLights.repo.UserRepository;
-import troller.tests.adsNearTrafficLights.security.JwtUtil;
 
 @Service
 public class StoplightService {
@@ -24,7 +23,7 @@ public class StoplightService {
     @Autowired
     private UserRepository userRepository;
 
-    public Stoplight createStoplight(Map<String, Object> stoplightData) {
+    public String createStoplight(Map<String, Object> stoplightData) {
         // Check if all required fields are present
         List<String> requiredFields = Arrays.asList("longitude", "latitude", "redColor", "yellowColor", "greenColor");
         for (String field : requiredFields) {
@@ -47,8 +46,9 @@ public class StoplightService {
         stoplight.setYellowColor(Boolean.parseBoolean(stoplightData.get("yellowColor").toString()));
         stoplight.setGreenColor(Boolean.parseBoolean(stoplightData.get("greenColor").toString()));
         stoplight.setProducer(producer);
+        stoplightRepository.save(stoplight);
 
-        return stoplightRepository.save(stoplight);
+        return "Stoplight created successfully.";
     }
 }
 

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import troller.tests.adsNearTrafficLights.model.Stoplight;
 import troller.tests.adsNearTrafficLights.service.StoplightService;
 
 @RestController
@@ -23,8 +22,8 @@ public class StoplightController {
     @PostMapping("/create")
     public ResponseEntity<?> createStoplight(@RequestBody Map<String, Object> stoplightData) {
         try {
-            Stoplight stoplight = stoplightService.createStoplight(stoplightData);
-            return ResponseEntity.ok(stoplight);
+            String message = stoplightService.createStoplight(stoplightData);
+            return ResponseEntity.ok(message);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
