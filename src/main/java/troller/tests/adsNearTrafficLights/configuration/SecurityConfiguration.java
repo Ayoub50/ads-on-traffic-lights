@@ -16,7 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import troller.tests.adsNearTrafficLights.component.JwtAuthenticationEntryPoint;
+import troller.tests.adsNearTrafficLights.security.JwtAuthenticationEntryPoint;
+import troller.tests.adsNearTrafficLights.security.JwtAuthenticationProvider;
 import troller.tests.adsNearTrafficLights.security.JwtRequestFilter;
 
 @Configuration

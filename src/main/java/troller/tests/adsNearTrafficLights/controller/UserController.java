@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import troller.tests.adsNearTrafficLights.dto.JwtResponse;
-import troller.tests.adsNearTrafficLights.dto.UserResponse;
 import troller.tests.adsNearTrafficLights.model.User;
 import troller.tests.adsNearTrafficLights.security.JwtUtil;
 import troller.tests.adsNearTrafficLights.service.UserService;

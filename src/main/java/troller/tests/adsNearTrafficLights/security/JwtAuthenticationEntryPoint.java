@@ -1,4 +1,4 @@
-package troller.tests.adsNearTrafficLights.component;
+package troller.tests.adsNearTrafficLights.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
