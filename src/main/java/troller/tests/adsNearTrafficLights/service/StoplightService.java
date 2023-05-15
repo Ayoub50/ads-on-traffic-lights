@@ -25,7 +25,7 @@ public class StoplightService {
     @Autowired
     private UserRepository userRepository;
 
-    public String createStoplight(Map<String, Object> stoplightData) {
+    public StoplightResponse createStoplight(Map<String, Object> stoplightData) {
         // Check if all required fields are present
         List<String> requiredFields = Arrays.asList("longitude", "latitude", "redColor", "yellowColor", "greenColor");
         for (String field : requiredFields) {
@@ -50,7 +50,7 @@ public class StoplightService {
         stoplight.setProducer(producer);
         stoplightRepository.save(stoplight);
 
-        return "Stoplight created successfully.";
+        return stoplight.toDTO();
     }
 
     public List<StoplightResponse> getAllStoplights() {

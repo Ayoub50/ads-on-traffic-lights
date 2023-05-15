@@ -26,8 +26,8 @@ public class StoplightController {
     @PostMapping("/create")
     public ResponseEntity<?> createStoplight(@RequestBody Map<String, Object> stoplightData) {
         try {
-            String message = stoplightService.createStoplight(stoplightData);
-            return ResponseEntity.ok(message);
+            StoplightResponse stoplight = stoplightService.createStoplight(stoplightData);
+            return ResponseEntity.ok(stoplight);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
