@@ -3,12 +3,14 @@ package troller.tests.adsNearTrafficLights.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import troller.tests.adsNearTrafficLights.dto.StoplightResponse;
 import troller.tests.adsNearTrafficLights.model.Stoplight;
 import troller.tests.adsNearTrafficLights.model.User;
 import troller.tests.adsNearTrafficLights.repo.StoplightRepository;
@@ -50,5 +52,11 @@ public class StoplightService {
 
         return "Stoplight created successfully.";
     }
+
+    public List<StoplightResponse> getAllStoplights() {
+        List<Stoplight> res = stoplightRepository.findAll();
+        return res.stream().map(Stoplight::toDTO).collect(Collectors.toList());
+    }
+    
 }
 

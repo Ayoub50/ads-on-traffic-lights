@@ -2,6 +2,9 @@ package troller.tests.adsNearTrafficLights.model;
 
 import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+
+import troller.tests.adsNearTrafficLights.dto.StoplightResponse;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,6 +38,18 @@ public class Stoplight {
     @JoinColumn(name="producer_id")
     private User producer;
 
+    public StoplightResponse toDTO() {
+        StoplightResponse dto = new StoplightResponse();
+        dto.setLongitude(this.getLongitude());
+        dto.setLatitude(this.getLatitude());
+        dto.setTimestamp(this.getTimestamp());
+        dto.setId(this.getId());
+        dto.setRedColor(this.getRedColor());
+        dto.setYellowColor(this.getYellowColor());
+        dto.setGreenColor(this.getGreenColor());
+        return dto;
+    }
+    
     // Getters and Setters
 
     public Long getId() {
