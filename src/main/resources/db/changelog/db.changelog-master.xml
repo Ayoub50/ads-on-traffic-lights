@@ -10,5 +10,8 @@
 	<include file="/version/changelog-01-advertisement.xml" relativeToChangelogFile="true"/>
 	<include file="/version/changelog-02-user.xml" relativeToChangelogFile="true"/>
 	<include file="/version/changelog-03-stopLight.xml" relativeToChangelogFile="true"/>
+	<include file="/version/changelog-04-pedestrianButton.xml" relativeToChangelogFile="true"/>
+	<include file="/version/changelog-05-topic.xml" relativeToChangelogFile="true"/>
+	<include file="/version/changelog-06-subscription.xml" relativeToChangelogFile="true"/>
 	
 </databaseChangeLog>
