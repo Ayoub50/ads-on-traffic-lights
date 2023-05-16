@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import troller.tests.adsNearTrafficLights.dto.JwtResponse;
+import troller.tests.adsNearTrafficLights.dto.AuthResponse;
 import troller.tests.adsNearTrafficLights.model.User;
 import troller.tests.adsNearTrafficLights.security.JwtUtil;
 import troller.tests.adsNearTrafficLights.service.UserService;
@@ -41,10 +41,11 @@ public class UserController {
             userService.createUser(user);
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             String jwt = jwtUtil.generateToken(userDetails);
-            JwtResponse jwtResponse = new JwtResponse();
-            jwtResponse.setToken(jwt);
+            AuthResponse authResponse = new AuthResponse();
+            authResponse.setToken(jwt);
+            authResponse.setUserType(userDetails.getAuthorities().stream().findFirst().get().toString());
 
-            return new ResponseEntity<>(jwtResponse, HttpStatus.CREATED);
+            return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -60,10 +61,11 @@ public class UserController {
                     new UsernamePasswordAuthenticationToken(username, password));
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             String jwt = jwtUtil.generateToken(userDetails);
-            JwtResponse jwtResponse = new JwtResponse();
-            jwtResponse.setToken(jwt);
+            AuthResponse authResponse = new AuthResponse();
+            authResponse.setToken(jwt);
+            authResponse.setUserType(userDetails.getAuthorities().stream().findFirst().get().toString());
             
-            return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+            return new ResponseEntity<>(authResponse, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }

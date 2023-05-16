@@ -40,6 +40,10 @@ public class StoplightService {
         // Fetch the User object from the database using the username
         User producer = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        if(!producer.getUserType().equals("producer")){
+            throw new IllegalArgumentException("Only producers are enabled to create stoplights");
+        }
 
         Stoplight stoplight = new Stoplight();
         stoplight.setLongitude(Double.parseDouble(stoplightData.get("longitude").toString()));

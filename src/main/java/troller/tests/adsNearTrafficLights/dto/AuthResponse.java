@@ -1,7 +1,8 @@
 package troller.tests.adsNearTrafficLights.dto;
 
-public class JwtResponse {
+public class AuthResponse {
     private String token;
+    private String userType;
 
     public void setToken(String token){
         this.token = token;
@@ -9,6 +10,14 @@ public class JwtResponse {
 
     public String getToken(){
         return this.token;
+    }
+
+    public void setUserType(String userType){
+        this.userType = userType;
+    }
+
+    public String getUserType(){
+        return this.userType;
     }
     
 }
