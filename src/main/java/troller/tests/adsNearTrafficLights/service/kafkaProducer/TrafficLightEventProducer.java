@@ -1,4 +1,4 @@
-package troller.tests.adsNearTrafficLights.service.producer;
+package troller.tests.adsNearTrafficLights.service.kafkaProducer;
 
 import troller.tests.adsNearTrafficLights.model.TrafficLightEvent;
 import troller.tests.adsNearTrafficLights.repo.TrafficLightEventRepository;

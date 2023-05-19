@@ -38,10 +38,10 @@ public class StoplightService {
         String username = userDetails.getUsername();
 
         // Fetch the User object from the database using the username
-        User producer = userRepository.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         
-        if(!producer.getUserType().equals("producer")){
+        if(!user.getUserType().equals("producer")){
             throw new IllegalArgumentException("Only producers are enabled to create stoplights");
         }
 
@@ -51,7 +51,7 @@ public class StoplightService {
         stoplight.setRedColor(Boolean.parseBoolean(stoplightData.get("redColor").toString()));
         stoplight.setYellowColor(Boolean.parseBoolean(stoplightData.get("yellowColor").toString()));
         stoplight.setGreenColor(Boolean.parseBoolean(stoplightData.get("greenColor").toString()));
-        stoplight.setProducer(producer);
+        stoplight.setProducer(user);
         stoplightRepository.save(stoplight);
 
         return stoplight.toDTO();

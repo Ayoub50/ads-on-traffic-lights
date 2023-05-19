@@ -1,7 +1,7 @@
 package troller.tests.adsNearTrafficLights.component;
 
 import troller.tests.adsNearTrafficLights.model.TrafficLightEvent;
-import troller.tests.adsNearTrafficLights.service.producer.TrafficLightEventProducer;
+import troller.tests.adsNearTrafficLights.service.kafkaProducer.TrafficLightEventProducer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
