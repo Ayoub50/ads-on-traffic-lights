@@ -1,4 +1,4 @@
-package troller.tests.adsNearTrafficLights.service.consumer;
+package troller.tests.adsNearTrafficLights.service.kafkaConsumer;
 
 import troller.tests.adsNearTrafficLights.controller.AdvertisementController;
 import troller.tests.adsNearTrafficLights.model.Advertisement;

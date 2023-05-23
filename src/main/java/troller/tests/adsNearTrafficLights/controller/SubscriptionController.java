@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import troller.tests.adsNearTrafficLights.dto.SubscriptionResponse;
-import troller.tests.adsNearTrafficLights.model.Subscription;
 import troller.tests.adsNearTrafficLights.service.SubscriptionService;
 
 @RestController
@@ -23,14 +22,8 @@ public class SubscriptionController {
     
     @PostMapping("/create")
     public ResponseEntity<?> addSubscription(@RequestBody Map<String, Object> subscriptionData){
-        try {
-            SubscriptionResponse subscription = subscriptionService.createSubscription(subscriptionData);
-            return ResponseEntity.ok(subscription);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+        SubscriptionResponse subscription = subscriptionService.createSubscription(subscriptionData);
+        return ResponseEntity.ok(subscription);
     }
 
 }

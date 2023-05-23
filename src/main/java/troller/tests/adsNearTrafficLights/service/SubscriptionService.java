@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import troller.tests.adsNearTrafficLights.dto.SubscriptionResponse;
 import troller.tests.adsNearTrafficLights.model.User;
 import troller.tests.adsNearTrafficLights.repo.UserRepository;
+import troller.tests.adsNearTrafficLights.util.BodyApis;
 
 @Service
 public class SubscriptionService {
@@ -22,11 +23,7 @@ public class SubscriptionService {
     public SubscriptionResponse createSubscription(Map<String, Object> subcriptionData){
         // Check if all required fields are present
         List<String> requiredFields = Arrays.asList("consumer_username", "stoplight_id", "pedestrinButton_id", "topic_name");
-        for (String field : requiredFields) {
-            if (!subcriptionData.containsKey(field)) {
-                throw new IllegalArgumentException("Missing required field: " + field);
-            }
-        }
+        BodyApis.isMissingRequiredField(requiredFields,subcriptionData);
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // Extract the username from the UserDetails
         String username = userDetails.getUsername();

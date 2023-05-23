@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import troller.tests.adsNearTrafficLights.dto.SubscriptionResponse;
+
 public class Subscription {
     
     @Id
@@ -38,6 +40,13 @@ public class Subscription {
     private LocalDateTime timestamp;
 
     // setters and getters
+
+    public SubscriptionResponse toDTO(){
+        SubscriptionResponse dto = new SubscriptionResponse();
+        dto.setId(this.id);
+        dto.setTimestamp(this.timestamp);
+        return dto;
+    }
 
     public Long getId(){
         return this.id;

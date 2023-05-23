@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,27 +24,15 @@ public class StoplightController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createStoplight(@RequestBody Map<String, Object> stoplightData) {
-        try {
-            StoplightResponse stoplight = stoplightService.createStoplight(stoplightData);
-            return ResponseEntity.ok(stoplight);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+        StoplightResponse stoplight = stoplightService.createStoplight(stoplightData);
+        return ResponseEntity.ok(stoplight);
     }
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getStopLights() {
-        try {
-            List<StoplightResponse> allStopLights;
-            allStopLights = stoplightService.getAllStoplights();
-            return ResponseEntity.ok(allStopLights);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+        List<StoplightResponse> allStopLights;
+        allStopLights = stoplightService.getAllStoplights();
+        return ResponseEntity.ok(allStopLights);
+}
 }
 

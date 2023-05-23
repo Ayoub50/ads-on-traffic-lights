@@ -37,38 +37,29 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
-        try {
-            userService.createUser(user);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-            String jwt = jwtUtil.generateToken(userDetails);
-            AuthResponse authResponse = new AuthResponse();
-            authResponse.setToken(jwt);
-            authResponse.setUserType(userDetails.getAuthorities().stream().findFirst().get().toString());
+        userService.createUser(user);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        String jwt = jwtUtil.generateToken(userDetails);
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setToken(jwt);
+        authResponse.setUserType(userDetails.getAuthorities().stream().findFirst().get().toString());
 
-            return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> userLoginData) {
         String username = userLoginData.get("username");
         String password = userLoginData.get("password");
-
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            String jwt = jwtUtil.generateToken(userDetails);
-            AuthResponse authResponse = new AuthResponse();
-            authResponse.setToken(jwt);
-            authResponse.setUserType(userDetails.getAuthorities().stream().findFirst().get().toString());
-            
-            return new ResponseEntity<>(authResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-        }
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(username, password));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        String jwt = jwtUtil.generateToken(userDetails);
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setToken(jwt);
+        authResponse.setUserType(userDetails.getAuthorities().stream().findFirst().get().toString());
+        
+        return new ResponseEntity<>(authResponse, HttpStatus.OK);
     }
 
 }
