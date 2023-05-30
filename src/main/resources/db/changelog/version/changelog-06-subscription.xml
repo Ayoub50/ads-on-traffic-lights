@@ -13,14 +13,17 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="active" type="boolean">
+                <constraints nullable="false"/>
+            </column>
             <column name="topic_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="stopLight_id" type="bigint">
-                <constraints nullable="false"/>
+            <column name="stoplight_id" type="bigint">
+                <constraints nullable="true"/>
             </column>
-            <column name="pedestrianButton_id" type="bigint">
-                <constraints nullable="false"/>
+            <column name="pedestrianbutton_id" type="bigint">
+                <constraints nullable="true"/>
             </column>
             <column name="consumer_id" type="bigint">
                 <constraints nullable="false"/>
@@ -36,7 +39,7 @@
                                   baseTableName="subscription" baseColumnNames="stoplight_id"
                                   referencedTableName="stoplight" referencedColumnNames="id"/>
         <addForeignKeyConstraint constraintName="fk_subscription_pedestrian_button"
-                                  baseTableName="subscription" baseColumnNames="pedestrianButton_id"
+                                  baseTableName="subscription" baseColumnNames="pedestrianbutton_id"
                                   referencedTableName="pedestrian_button" referencedColumnNames="id"/>
         <addForeignKeyConstraint constraintName="fk_subscription_topic"
                                   baseTableName="subscription" baseColumnNames="topic_id"

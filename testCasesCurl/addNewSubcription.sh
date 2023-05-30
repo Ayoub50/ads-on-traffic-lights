@@ -1,8 +1,9 @@
 curl -X POST "http://localhost:8080/subscription/create" \
      -H "Content-Type: application/json" \
-     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYWxhbGxHaXJvIiwicm9sZSI6W3siYXV0aG9yaXR5IjoicHJvZHVjZXIifV0sImV4cCI6MTY4NDE4NzE1NSwiaWF0IjoxNjg0MTUxMTU1fQ.-0kPutAfiUsvmYIOrAqS0KMqHlYgKUxBK-jc_yNOOo4" \
+     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb25zIiwicm9sZSI6W3siYXV0aG9yaXR5IjoiY29uc3VtZXIifV0sImV4cCI6MTY4NTQ5NzM4MiwiaWF0IjoxNjg1NDYxMzgyfQ.4pFE1PkYo0CW66Bxo306oQcsK9dxwxDCjLnm0WrDeGw" \
      -d '{
            "consumer_username": "cons",
            "stoplight_id": 2,
+           "pedestrianButton_id": null,
            "topic_name": "traffic_lights"
          }'

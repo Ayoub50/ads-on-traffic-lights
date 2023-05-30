@@ -3,21 +3,28 @@ package troller.tests.adsNearTrafficLights.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import troller.tests.adsNearTrafficLights.dto.SubscriptionResponse;
 
+@Entity
+@Table(name="subscription")
 public class Subscription {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="active")
+    private boolean active;
     
     @ManyToOne
     @JoinColumn(name="consumer_id")
@@ -28,11 +35,11 @@ public class Subscription {
     private Topic topic;
 
     @ManyToOne
-    @JoinColumn(name="stopLight_id")
+    @JoinColumn(name="stoplight_id")
     private Stoplight stoplight;
     
     @ManyToOne
-    @JoinColumn(name="pedestrianButton_id")
+    @JoinColumn(name="pedestrianbutton_id")
     private PedestrianButton pedestrianButton;
 
     @Column(name="timestamp")
@@ -54,6 +61,14 @@ public class Subscription {
 
     public void setId(Long id){
         this.id = id;
+    }
+
+    public boolean getActive(){
+        return this.active;
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
     }
 
     public User getConsumer(){
