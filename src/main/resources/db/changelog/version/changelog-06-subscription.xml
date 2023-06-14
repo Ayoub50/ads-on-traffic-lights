@@ -16,16 +16,25 @@
             <column name="active" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="topic_id" type="bigint">
+            <column name="recurrent" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="stoplight_id" type="bigint">
+            <column name="start" type="datetime">
                 <constraints nullable="true"/>
             </column>
-            <column name="pedestrianbutton_id" type="bigint">
+            <column name="end" type="datetime">
                 <constraints nullable="true"/>
             </column>
-            <column name="consumer_id" type="bigint">
+            <column name="topic" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stoplight" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="pedestrianbutton" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="user" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="timestamp" type="timestamp">
@@ -33,16 +42,16 @@
             </column>
         </createTable>
         <addForeignKeyConstraint constraintName="fk_subscription_consumer"
-                                  baseTableName="subscription" baseColumnNames="consumer_id"
+                                  baseTableName="subscription" baseColumnNames="user"
                                   referencedTableName="user" referencedColumnNames="id"/>
         <addForeignKeyConstraint constraintName="fk_subscription_stopLight"
-                                  baseTableName="subscription" baseColumnNames="stoplight_id"
+                                  baseTableName="subscription" baseColumnNames="stoplight"
                                   referencedTableName="stoplight" referencedColumnNames="id"/>
         <addForeignKeyConstraint constraintName="fk_subscription_pedestrian_button"
-                                  baseTableName="subscription" baseColumnNames="pedestrianbutton_id"
+                                  baseTableName="subscription" baseColumnNames="pedestrianbutton"
                                   referencedTableName="pedestrian_button" referencedColumnNames="id"/>
         <addForeignKeyConstraint constraintName="fk_subscription_topic"
-                                  baseTableName="subscription" baseColumnNames="topic_id"
+                                  baseTableName="subscription" baseColumnNames="topic"
                                   referencedTableName="topic" referencedColumnNames="id"/>
     </changeSet>
 

@@ -24,22 +24,31 @@ public class Subscription {
     private Long id;
 
     @Column(name="active")
-    private boolean active;
+    private Boolean active;
+
+    @Column(name="recurrent")
+    private Boolean recurrent;
     
-    @ManyToOne
-    @JoinColumn(name="consumer_id")
-    private User consumer;
+    @Column(name="start")
+    private LocalDateTime start; ;
+    
+    @Column(name="end")
+    private LocalDateTime end; 
 
     @ManyToOne
-    @JoinColumn(name="topic_id")
+    @JoinColumn(name="consumer")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name="topic")
     private Topic topic;
 
     @ManyToOne
-    @JoinColumn(name="stoplight_id")
+    @JoinColumn(name="stoplight")
     private Stoplight stoplight;
     
     @ManyToOne
-    @JoinColumn(name="pedestrianbutton_id")
+    @JoinColumn(name="pedestrianbutton")
     private PedestrianButton pedestrianButton;
 
     @Column(name="timestamp")
@@ -63,7 +72,7 @@ public class Subscription {
         this.id = id;
     }
 
-    public boolean getActive(){
+    public Boolean getActive(){
         return this.active;
     }
 
@@ -71,12 +80,36 @@ public class Subscription {
         this.active = active;
     }
 
+    public Boolean getRecurrent(){
+        return this.recurrent;
+    }
+
+    public void setRecurrent(boolean recurrent){
+        this.recurrent = recurrent;
+    }
+
+    public LocalDateTime getStart(){
+        return this.start;
+    }
+
+    public void setStart(LocalDateTime start){
+        this.start = start;
+    }
+
+    public LocalDateTime getEnd(){
+        return this.end;
+    }
+
+    public void setEnd(LocalDateTime end){
+        this.end = end;
+    }
+
     public User getConsumer(){
-        return this.consumer;
+        return this.user;
     }
 
     public void setConsumer(User consumer){
-        this.consumer = consumer;
+        this.user = consumer;
     }
 
     public Stoplight getStoplight(){

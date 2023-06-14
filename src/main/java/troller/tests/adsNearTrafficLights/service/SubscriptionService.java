@@ -57,11 +57,15 @@ public class SubscriptionService {
             throw new IllegalArgumentException("Only consumers are enabled to subscribe");
         }
 
+        // FIRST CHECK IF THE TOPIC PROVIDED IS EXISTENT
+
         Optional<Topic> topic = topicRepository.findByName(subcriptionData.get("topic_name").toString());
         if(!topic.isPresent()){
             throw new IllegalArgumentException("The topic provided does not exist");
         }
 
+        // REMAKE ORDER LOGIC FOR THE SUBSCRIPTION
+        
         // Now here add code to create new subscription
         Subscription sub = new Subscription();
         sub.setConsumer(user);
@@ -71,6 +75,21 @@ public class SubscriptionService {
                 Optional<Stoplight> stoplight = stoplightRepository.findById(Long.parseLong(subcriptionData.get("stoplight_id").toString()));
                 if(!stoplight.isPresent()){
                     throw new IllegalArgumentException("The stoplight provided does not exist");
+                }
+                // HERE ADD CONTROL FOR ALREADY ACTIVE SUBSCRIPTIONS
+                // AGGIUNGERE ORARI DI ISCRIZIONE - FROM - TO 
+                // AGGIUNGERE COLONNA RECURRENT, COLONNA FROM, COLONNA TO, COLONNA DAY.
+                // AGGIUNGERE COLONNA PRIORITY? SERVE UN MODO PER DECIDERE QUALE PUBBLICITA FARE VEDERE PRIMA
+                // SE RICORRENTE O GIORNI SPECIFICI
+
+                List<Subscription> oldSubsList = subscriptionRepository.findAllByStoplightAndUser(stoplight,user);
+                if(!oldSubsList.isEmpty()){
+                    for (Subscription subscription : oldSubsList) {
+                        if(subscription.getActive()){
+                            // ADD AN EXPIRATION DATE FOR THE SUBSCRIPTION
+                            throw new IllegalArgumentException("There is already an active subscription for this stoplight");
+                        }
+                    }
                 }
                 sub.setStoplight(stoplight.orElse(null));
                 sub.setPedestrianbutton(null);
